@@ -1,0 +1,9 @@
+---
+
+- hosts: linuxservers
+
+  become: yes
+
+  roles:
+
+    - nginx_role

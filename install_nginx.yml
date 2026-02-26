@@ -1,0 +1,45 @@
+---
+
+- name: Install and Configure Nginx
+
+  hosts: linuxservers
+
+  become: yes
+
+
+
+  tasks:
+
+    - name: Install nginx
+
+      apt:
+
+        name: nginx
+
+        state: present
+
+      notify: Restart nginx
+
+
+
+    - name: Update default Nginx page
+
+      copy:
+
+        content: "Hello from Ansible!"
+
+        dest: /var/www/html/index.html
+
+      notify: Restart nginx
+
+
+
+  handlers:
+
+    - name: Restart nginx
+
+      service:
+
+        name: nginx
+
+        state: restarted
